@@ -60,9 +60,7 @@ def parametros_dinamicos(y, sample_rate, quality_level):
     N_FFT = int(np.round(N_FFT_ref * fator))
     HOP_LENGTH = int(np.round(HOP_LENGTH_ref * fator))
     N_COMPONENTS = int(np.round(N_COMPONENTS_ref * fator))
-
-    if N_FFT % 2 != 0:
-        N_FFT += 1
+    print(f"Parâmetros dinâmicos: N_FFT={N_FFT}, HOP_LENGTH={HOP_LENGTH}, N_COMPONENTS={N_COMPONENTS}")
 
     return N_FFT, HOP_LENGTH, N_COMPONENTS
 
@@ -513,7 +511,7 @@ def enable_player_controls():
 root = tk.Tk()
 root.title("Compressor COCADA")
 
-# Main Title
+# Menu Principal
 lbl_main_title = tk.Label(root, text="Compressão Otimizada de Conteúdo Áudio Digital Avançado (C.O.C.A.D.A)", font=("Helvetica", 12, "bold"))
 lbl_main_title.pack(pady=10)
 
@@ -528,7 +526,7 @@ lbl_compressao_input.pack(padx=5, pady=2)
 quality_frame = tk.LabelFrame(frame_compress, text="Qualidade de Compressão")
 quality_frame.pack(padx=5, pady=5, fill='x')
 
-quality_var = tk.StringVar(value="media-alta") # Default quality
+quality_var = tk.StringVar(value="media-alta") # Qualidade padrão
 tk.Radiobutton(quality_frame, text="Alta Qualidade (16-bit)", variable=quality_var, value="alta", command=set_compression_quality).pack(anchor="w", padx=10)
 tk.Radiobutton(quality_frame, text="Média-alta Qualidade (16-bit)", variable=quality_var, value="media-alta", command=set_compression_quality).pack(anchor="w", padx=10)
 tk.Radiobutton(quality_frame, text="Média-baixa Qualidade (8-bit)", variable=quality_var, value="media-baixa", command=set_compression_quality).pack(anchor="w", padx=10)
@@ -553,7 +551,7 @@ tk.Button(frame_player, text="Selecionar áudio comprimido (.npz)", command=sele
 lbl_play_input = tk.Label(frame_player, text="Nenhum arquivo selecionado")
 lbl_play_input.pack(padx=5, pady=2)
 
-# Playback controls
+# Controles do player
 player_controls_frame = tk.Frame(frame_player)
 player_controls_frame.pack(pady=5)
 
@@ -562,7 +560,7 @@ btn_play.grid(row=0, column=0, padx=2)
 btn_stop = tk.Button(player_controls_frame, text="Stop", command=stop_playback)
 btn_stop.grid(row=0, column=2, padx=2)
 
-# Time slider
+# Barra de tempo
 time_slider_frame = tk.Frame(frame_player)
 time_slider_frame.pack(fill='x', padx=5, pady=2)
 
@@ -583,7 +581,7 @@ slider_volume = ttk.Scale(volume_frame, from_=0, to=1, orient='horizontal', comm
 slider_volume.set(volume_level) # Set initial volume
 slider_volume.pack(side=tk.LEFT, expand=True, fill='x', padx=5)
 
-# Disable controls initially
+# Desativa os controles na inicialização
 disable_player_controls()
 
 root.mainloop()
